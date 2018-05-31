@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Movie Detail,Trailer</string>
+    <string name="crime_movies">Crime Movies</string>
+    <string name="cast_and_crew">Cast :</string>
+    <string name="overview">Overview :</string>
+    <string name="titles">Title :</string>
+    <string name="released_date">Released Date :</string>
+    <string name="trailer">Trailer</string>
+
+    <string name="latest_movies">Latest </string>
+    <string name="action_movies">Action </string>
+    <string name="animated_movies">Animated </string>
+    <string name="comedy_movies">Comedy </string>
+    <string name="horror_movies">Horror </string>
+    <string name="sci_fi_movies">Sci-Fi </string>
+</resources>

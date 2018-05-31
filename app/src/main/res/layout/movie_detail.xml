@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+   >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageview2"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:textSize="20sp"
+        android:contentDescription="@string/app_name" />
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        android:layout_margin="20dp">
+
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:orientation="vertical"
+               android:layout_margin="10dp">
+
+
+               <Button
+                   android:id="@+id/trailer"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_margin="10dp"
+                   android:textSize="20sp"
+                   android:background="@color/colorPrimary"
+                   android:onClick="trailer"
+                   android:text="@string/trailer"
+                   android:textColor="@color/cardview_light_background" />
+
+               <TextView
+                   android:textSize="22sp"
+                   android:layout_marginBottom="10dp"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:textColor="@android:color/black"
+                   android:text="@string/titles"
+                   android:textStyle="bold"/>
+
+               <TextView
+                   android:textSize="16sp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textColor="@android:color/black"
+                   android:id="@+id/title"/>
+
+               <View
+                   android:layout_width="match_parent"
+                   android:layout_height="2dp"
+                   android:background="#000000"
+                   android:layout_marginBottom="15dp"
+                   android:layout_marginTop="15dp"/>
+
+               <TextView
+                   android:textSize="22sp"
+                   android:layout_marginBottom="10dp"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:textColor="@android:color/black"
+                   android:text="@string/released_date"
+                   android:textStyle="bold"/>
+
+               <TextView
+                   android:textSize="16sp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textColor="@android:color/black"
+                   android:id="@+id/date"/>
+
+               <View
+                   android:layout_width="match_parent"
+                   android:layout_height="2dp"
+                   android:background="#000000"
+                   android:layout_marginBottom="15dp"
+                   android:layout_marginTop="15dp"/>
+
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginBottom="10dp"
+                   android:text="@string/cast_and_crew"
+                   android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                   android:textSize="22sp"/>
+
+               <TextView
+                   android:id="@+id/crew"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textColor="@android:color/black"
+                   android:textSize="16sp"
+                    />
+
+               <View
+                   android:layout_width="match_parent"
+                   android:layout_height="2dp"
+                   android:background="#000000"
+                   android:layout_marginBottom="15dp"
+                   android:layout_marginTop="15dp"/>
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:textSize="22sp"
+                   android:textStyle="bold"
+                   android:layout_marginBottom="10dp"
+                   android:textColor="@android:color/black"
+                   android:text="@string/overview"/>
+
+               <TextView
+                   android:id="@+id/overview"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:textColor="@android:color/black"
+                   android:textSize="16sp"
+                   android:layout_marginBottom="30dp"/>
+
+           </LinearLayout>
+               </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
