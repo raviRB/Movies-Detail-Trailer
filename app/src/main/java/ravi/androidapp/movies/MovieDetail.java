@@ -24,7 +24,7 @@ import com.squareup.picasso.Picasso;
 public class MovieDetail extends AppCompatActivity {
 
     String key;
-
+    String title;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class MovieDetail extends AppCompatActivity {
             Intent intent = getIntent();
 
             String backdrop = intent.getStringExtra("image1");
-            String title = intent.getStringExtra("title");
+            title = intent.getStringExtra("title");
             String crew = intent.getStringExtra("crew");
             String date = intent.getStringExtra("date");
             key = intent.getStringExtra("key");
@@ -58,9 +58,10 @@ public class MovieDetail extends AppCompatActivity {
     }
 
     public void trailer(View view) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v="+key)));
-
-
+        if(key.isEmpty())
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query="+title)));
+        else
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v="+key)));
     }
 
     public void checkNetworkConnection(){

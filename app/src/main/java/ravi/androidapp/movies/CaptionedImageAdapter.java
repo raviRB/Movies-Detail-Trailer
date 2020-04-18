@@ -85,7 +85,7 @@ public class CaptionedImageAdapter extends RecyclerView.Adapter<CaptionedImageAd
     @Override
     public int getItemCount()
     {
-        Log.i("size", String.valueOf(title.size()));
+        //Log.i("size", String.valueOf(title.size()));
         return title.size();
     }
 

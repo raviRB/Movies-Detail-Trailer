@@ -1,4 +1,4 @@
-package droid.ravi.mrrobot.AttendanceManager;
+package ravi.androidapp.movies;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -16,11 +16,9 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         View aboutPage = new AboutPage(this)
                 .isRTL(false)
-                .setDescription("Developed By - Ravi Bhatt\n" +"\nNote:-"+
-                        "Long press a Subject to Edit/Delete it.")
-                .setImage(R.drawable.icon)
+                .setDescription("Developed By - Ravi Bhatt\n")
+                .setImage(R.drawable.icon_small)
                 .addItem(new Element().setTitle("Version 1.0"))
-                .addItem(new Element().setTitle("Icon Source = https://icons8.com/").setIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("https://icons8.com/"))) )
                 .addGroup("Connect with us")
                 .addEmail("ravi.bhatt.754918@gmail.com")
                 .addGitHub("raviRB")
