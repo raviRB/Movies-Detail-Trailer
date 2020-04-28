@@ -5,9 +5,13 @@
     tools:context="droid.ravi.mrrobot.AttendanceManager.MainActivity">
 
     <item
-        android:id="@+id/about"
-        android:title="About"
+        android:id="@+id/favorite"
+        android:title="@string/favorite"
         android:icon="@drawable/ic_info_outline_black_24dp"
-        app:showAsAction="always" />
-
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/about"
+        android:title="@string/about"
+        android:icon="@drawable/ic_info_outline_black_24dp"
+        app:showAsAction="never" />
 </menu>

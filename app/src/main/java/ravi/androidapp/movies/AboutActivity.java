@@ -16,7 +16,7 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         View aboutPage = new AboutPage(this)
                 .isRTL(false)
-                .setDescription("Developed By - Ravi Bhatt\n")
+                .setDescription("Note - To add a movie to favorite tap the heart icon on the top right corner.\n\n Developed By - Ravi Bhatt\n")
                 .setImage(R.drawable.icon_small)
                 .addItem(new Element().setTitle("Version 1.0"))
                 .addGroup("Connect with us")

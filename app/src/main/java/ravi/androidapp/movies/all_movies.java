@@ -25,7 +25,6 @@ public class all_movies extends AppCompatActivity{
     RecyclerView recyclerView;
     int i=0;
     String Tablename;
-    private DatabaseReference databaseReference;
     Movie obj;
     ArrayList<String> poster = new ArrayList<>();
     ArrayList<String> title = new ArrayList<>();
@@ -34,6 +33,7 @@ public class all_movies extends AppCompatActivity{
     ArrayList<String> crew = new ArrayList<>();
     ArrayList<String> date = new ArrayList<>();
     ArrayList<String> key = new ArrayList<>();
+    ArrayList<String> id = new ArrayList<>();
     ProgressDialog progressDialog;
 
     @Override
@@ -42,7 +42,7 @@ public class all_movies extends AppCompatActivity{
         setContentView(R.layout.all_movies_card_view);
         Intent intent = getIntent();
         Tablename = intent.getStringExtra("Tablename");
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please Wait !!");
         progressDialog.setTitle("Loading.....");
@@ -56,6 +56,7 @@ public class all_movies extends AppCompatActivity{
                     count++;
                     obj = d.getValue(Movie.class);
                     assert obj != null;
+                    id.add(obj.getId());
                     poster.add(obj.getPoster());
                     title.add(obj.getTitle());
                     backdrop.add(obj.getBackdrop());
@@ -66,7 +67,7 @@ public class all_movies extends AppCompatActivity{
                 }
                 progressDialog.dismiss();
                 recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
-                CaptionedImageAdapter adapter = new CaptionedImageAdapter(title,poster,backdrop,overview,crew,date,key,getApplicationContext());
+                CaptionedImageAdapter adapter = new CaptionedImageAdapter(id,title,poster,backdrop,overview,crew,date,key,getApplicationContext());
                 recyclerView.setAdapter(adapter);
                 GridLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),2);
                 recyclerView.setLayoutManager(layoutManager);

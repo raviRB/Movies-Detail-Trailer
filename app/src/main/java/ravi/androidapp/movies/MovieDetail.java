@@ -4,7 +4,7 @@ package ravi.androidapp.movies;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -15,32 +15,40 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.squareup.picasso.Picasso;
 
 
 public class MovieDetail extends AppCompatActivity {
 
-    String key;
-    String title;
+    String title, date, poster, id, key;
+    ToggleButton favorite_toggle_button;
+    MovieDbHelper myMoviesDb;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.movie_detail);
         super.onCreate(savedInstanceState);
         ActionBar actionBar = getSupportActionBar();
+        myMoviesDb = new MovieDbHelper(this);
+        assert actionBar != null;
         actionBar.hide();
 
             Intent intent = getIntent();
 
-            String backdrop = intent.getStringExtra("image1");
+            poster = intent.getStringExtra("poster");
+            id = intent.getStringExtra("id");
+            final String backdrop = intent.getStringExtra("image1");
             title = intent.getStringExtra("title");
-            String crew = intent.getStringExtra("crew");
-            String date = intent.getStringExtra("date");
+            final String crew = intent.getStringExtra("crew");
+            date = intent.getStringExtra("date");
             key = intent.getStringExtra("key");
-            String overview = intent.getStringExtra("overview");
+            final String overview = intent.getStringExtra("overview");
 
             ImageView imageView1 = (ImageView) findViewById(R.id.imageview2);
 
@@ -55,11 +63,35 @@ public class MovieDetail extends AppCompatActivity {
             dateview.setText(date);
         isNetworkConnectionAvailable();
 
+        // favorite button ( heart shaped ) to mark a movie as favorite
+        favorite_toggle_button = findViewById(R.id.button_favorite);
+        final Cursor cursor = myMoviesDb.isFavorite(id);
+        cursor.moveToFirst();
+        if(cursor.getCount()>0 && cursor.getInt(0)==1)
+            favorite_toggle_button.setChecked(true);
+
+        favorite_toggle_button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+               if(isChecked){
+                   if(cursor.getCount()==0)
+                       myMoviesDb.insertMovie(id,title,poster,backdrop,date,overview,key,crew);
+                   else
+                       myMoviesDb.updateMovie(id,1);
+                   Toast.makeText(MovieDetail.this,"Added to Favorite" ,Toast.LENGTH_SHORT).show();
+               }
+               else{
+                   myMoviesDb.updateMovie(id,0); // 0 - not favorite
+                   Toast.makeText(MovieDetail.this,"Removed from Favorite" ,Toast.LENGTH_SHORT).show();
+               }
+            }
+        });
+
     }
 
     public void trailer(View view) {
         if(key.isEmpty())
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query="+title)));
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query="+title+"+trailer")));
         else
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v="+key)));
     }
@@ -79,21 +111,20 @@ public class MovieDetail extends AppCompatActivity {
         alertDialog.show();
     }
 
-    public boolean isNetworkConnectionAvailable(){
+    public void isNetworkConnectionAvailable(){
         ConnectivityManager cm =
                 (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 
+        assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnected();
         if(isConnected) {
             Log.d("Network", "Connected");
-            return true;
         }
         else{
             checkNetworkConnection();
             Log.d("Network","Not Connected");
-            return false;
         }
     }
 

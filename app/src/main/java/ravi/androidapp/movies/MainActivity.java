@@ -1,13 +1,10 @@
 package ravi.androidapp.movies;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,20 +12,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             alertDialog.show();
         }
 
-        public boolean isNetworkConnectionAvailable() {
+        public void isNetworkConnectionAvailable() {
             ConnectivityManager cm =
                     (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -66,11 +49,9 @@ public class MainActivity extends AppCompatActivity {
                     activeNetwork.isConnected();
             if (isConnected) {
                 Log.d("Network", "Connected");
-                return true;
             } else {
                 checkNetworkConnection();
                 Log.d("Network", "Not Connected");
-                return false;
             }
 
         }
@@ -96,12 +77,18 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.about) {
             startActivity(new Intent(MainActivity.this, AboutActivity.class));
         }
+        if(item.getItemId() == R.id.favorite){
+            startActivity(new Intent(MainActivity.this, favoriteMoviesActivity.class));
+        }
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        //leaving empty to avoid getting back to empty favorite activity
+    }
 
-
-// Download setup from TMDB Database
+    // Download setup from TMDB Database
 /*
     ProgressDialog pd;
     byte[] b1, b2;

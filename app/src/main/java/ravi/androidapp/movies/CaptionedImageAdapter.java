@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -36,9 +37,10 @@ public class CaptionedImageAdapter extends RecyclerView.Adapter<CaptionedImageAd
     private ArrayList<String> crew = new ArrayList<>();
     private ArrayList<String> date = new ArrayList<>();
     private ArrayList<String> key = new ArrayList<>();
+    private ArrayList<String> id = new ArrayList<>();
 
 
-    CaptionedImageAdapter(ArrayList<String> title, ArrayList<String> poster, ArrayList<String> backdrop, ArrayList<String> overview, ArrayList<String> crew, ArrayList<String> date, ArrayList<String> key, Context applicationContext) {
+    CaptionedImageAdapter(ArrayList<String> id, ArrayList<String> title, ArrayList<String> poster, ArrayList<String> backdrop, ArrayList<String> overview, ArrayList<String> crew, ArrayList<String> date, ArrayList<String> key, Context applicationContext) {
         this.title= title;
         this.poster = poster;
         this.c = applicationContext;
@@ -47,8 +49,10 @@ public class CaptionedImageAdapter extends RecyclerView.Adapter<CaptionedImageAd
         this.crew= crew;
         this.date = date;
         this.key = key;
+        this.id = id;
     }
 
+    @NonNull
     @Override
     public CaptionedImageAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         CardView cv = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.card_captioned_image,parent,false);
@@ -70,6 +74,8 @@ public class CaptionedImageAdapter extends RecyclerView.Adapter<CaptionedImageAd
             public void onClick(View view) {
                 Intent intent = new Intent(cardView.getContext(),MovieDetail.class);
 
+                intent.putExtra("id", id.get(position));
+                intent.putExtra("poster", poster.get(position));
                 intent.putExtra("title", title.get(position));
                 intent.putExtra("crew", crew.get(position));
                 intent.putExtra("image1", backdrop.get(position));

@@ -23,6 +23,7 @@
         <activity android:name=".MovieDetail"/>
         <activity android:name=".AboutActivity"/>
         <activity android:name=".all_movies"/>
+        <activity android:name=".favoriteMoviesActivity"/>
     </application>
 
 </manifest>

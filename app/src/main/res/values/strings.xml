@@ -16,4 +16,6 @@
     <string name="sci_fi_movies">Sci-Fi </string>
     <string name="bollywood_movies">Bollywood Movies</string>
     <string name="tv_shows">TV Shows</string>
+    <string name="about">About</string>
+    <string name="favorite">Favorite</string>
 </resources>
